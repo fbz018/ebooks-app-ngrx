@@ -1,0 +1,6 @@
+<div class="books-list-container">
+    <div class="books-container" *ngIf="(booksList$ | async); let bookItems; else loading">
+        <book *ngFor="let book of bookItems" [item]="book"></book>
+    </div>
+</div>
+<ng-template #loading>Loading Books...</ng-template>

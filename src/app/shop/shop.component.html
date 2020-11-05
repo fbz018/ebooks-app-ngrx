@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Gérer votre commande</h1>
+<div mat-dialog-content>
+    
+<div class="shop-container" *ngIf="(selectedBooks?.length > 0);else loading">
+    <mat-list>
+        <mat-list-item *ngFor="let book of selectedBooks ; trackBy: trackByFn; let i = index">
+            <div class="item-content">
+                <div class="icon-book">
+                    <mat-icon mat-list-icon><img src="{{book.elem.cover}}" width="30" height="40"></mat-icon>
+                </div>
+                <div class="info-book">
+                    <div class="title" mat-line>{{book.elem.title}}</div>
+                    <div mat-line> Qte:{{book.nbocc}} </div>
+                    <div mat-line> {{book.elem.price * book.nbocc}} € </div>
+                </div>
+    
+                <div class="actions-content">
+                    <mat-icon (click)="addOneBook(book.elem, i)" mat-list-icon>add</mat-icon>
+                    <mat-icon (click)="removeOneBook(book.elem)" mat-list-icon>remove</mat-icon>
+                    <mat-icon (click)="deleteBookFromList(book.elem)" mat-list-icon>delete</mat-icon>
+                </div>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+    <label> <b>montant total: {{getMontantTotal()}}€</b> </label>
+    <div class="offers-container">
+        <button class="btn-offers" mat-button (click)='showOffersPanel(selectedBooks)'>Voir les offres !!</button>
+    
+        <div *ngIf="show" class="offres-content">
+            <label>Offres possible pour votre Commande</label>
+            <mat-list>
+                <mat-list-item *ngFor="let offer of (offers$ | async) ; let i = index">
+                    <div class="offers-list" [ngSwitch]="offer?.type">
+                        <label *ngSwitchCase="'percentage'" (click)="offerPercentClicked(offer?.value)">
+                            Pourcentage: Vous avez {{offer?.value}} % de réduction
+                        </label>
+                        <label *ngSwitchCase="'minus'" (click)="offerMinusClicked(offer?.value)">
+                            Minus: Vous avez -{{offer?.value}}€ sur le total à payer
+                        </label>
+                        <label *ngSwitchCase="'slice'" (click)="offerSliceClicked(offer?.value)">
+                            Slice: Vous avez {{offer?.value}}€ offerte 100€ d'achat
+                        </label>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+            <div *ngIf="montantAPayer>0">
+                <label><b>Montant à payer: {{montantAPayer}}€</b></label>
+                <button class="btn-offers" mat-button>payer</button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<ng-template #loading><h1>Votre Panier est vide !!</h1></ng-template> 
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>quitter</button>
+</div>

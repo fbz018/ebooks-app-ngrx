@@ -1,0 +1,92 @@
+label {
+    color: brown;
+    font-family: cursive;
+ }
+mat-list{
+    font-family: 'Material Icons' !important;
+    overflow:auto;
+    mat-item-list{
+        .title{
+            font-size:1rem;
+        }
+    }
+   }
+
+   .item-content{
+       display:flex;
+       flex-direction: row;
+
+       .icon-book{
+           flex:0 0 auto;
+           mat-icon{
+            width: 2rem;
+            height: 3rem;
+            img{
+                width: 2rem;
+                height: 3rem;
+               }
+           }
+       }
+
+       .info-book{
+           flex:1 1 auto;
+           flex: 1 1 auto;
+           margin: 0 1rem;
+           color: brown;
+           .title{
+            font-size: small;
+           }  
+       }
+
+       .actions-content {
+           flex: 0 0 auto;
+           cursor: pointer;
+        ::ng-deep .mat-icon{
+         color: brown;
+        }
+     
+    }
+   }
+
+   .offers-container{
+       display: flex;
+       flex-direction: column;
+       .btn-offers{
+           cursor:pointer;
+           align-self: center;
+           background-color: darkkhaki;
+           color: darkgreen;
+       }
+   }
+
+   .offers-list{
+    label{
+        display: block;
+        background-color: burlywood;
+        border-radius: 1rem;
+        padding: 100;
+        width: 100%;
+        padding: 0.5rem;
+        text-align: center;
+        color: brown;
+        font-family: cursive;
+        font-size: revert;
+        cursor: pointer;
+       }
+   }
+   
+
+   .shop-container{
+       display: block;
+       width: 100%;
+       height: 100%;
+   }
+
+   .item-content{
+       display: flex !important; 
+       flex-direction: row!important;
+       justify-content: flex-start !important;
+       align-items: center !important;
+       width: 100%;
+
+   }

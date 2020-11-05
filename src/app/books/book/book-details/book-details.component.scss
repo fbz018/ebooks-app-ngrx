@@ -1,0 +1,58 @@
+.book-details-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:2rem;
+}
+
+.book-content-container{
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #e6c3db33 !important;
+    padding: 1rem !important;
+    h1{
+        color: brown;
+    }
+    .book-content{
+        flex: 0 0 50%;
+        font-size: small;
+        }
+}
+
+.book-img{
+    flex: 0 0 15%;
+    display: flex;
+    justify-content: center;
+    margin-right: 3rem;
+
+    img{
+        width:100%;
+        height:100%;
+    }
+}
+
+.book-purchase-panel{
+    //flex: 0 0 30%;
+    flex: 0 0 auto;
+    display: block;
+    padding: 3rem;
+    background-color: #e2baa347;
+    border-radius: 1rem;
+    margin-left: 3rem;
+
+    .price{
+        display: flex;
+        flex-direction: rox;
+        color: brown;
+    }
+
+    .add-book-btn{
+    background-color: firebrick;
+    color: white;
+    border-radius: 1rem;
+    }
+    .comment{
+        font-size:smaller;
+        color: darkgoldenrod;
+    }
+}

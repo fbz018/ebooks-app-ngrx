@@ -1,0 +1,33 @@
+:host{
+    background-color: antiquewhite;
+}
+.book-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem;
+    padding: 0.5rem;
+}
+
+.img{
+    flex: 1 1 auto;
+    align-self: center;
+}
+
+.title{
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.img, .title{
+    cursor: pointer;
+}
+.title:hover{
+    color:#990000;
+}
+
+.price {
+    flex: 0 0 auto;
+    text-align: center;
+}
+

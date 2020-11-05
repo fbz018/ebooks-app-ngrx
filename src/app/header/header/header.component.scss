@@ -1,0 +1,28 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+}
+
+::ng-deep .mat-dialog-container {
+    background-color: antiquewhite !important;
+  }
+
+.isvisible{
+    visibility: visible !important;
+}
+.ishidden{
+    visibility: hidden !important;
+}
+
+.toolbar {
+    flex: 0 0 auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+mat-icon{
+ font-family: 'Material Icons' !important;
+ cursor: pointer;
+}

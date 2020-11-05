@@ -1,0 +1,34 @@
+<div class="book-details-container">
+    <div class="book-img">
+        <img src="{{bookItem?.cover}}">
+    </div>
+    <div class="book-content-container">
+        <h1>{{bookItem?.title}}</h1>
+        <div class="book-content">
+            <!-- <div *ngFor="let item of (bookItem?.synopsis); trackBy = trackByTextFn; let i = index;">
+                {{item | splitTextAt : 200}}
+            </div>  -->
+            {{bookItem?.synopsis}}
+            <br>
+
+        </div>
+    </div>
+
+    <div class="book-purchase-panel">
+        <div class="price">
+           <h3>Prix:</h3> 
+            <span><b>{{bookItem?.price}}</b></span>
+            <span>€</span>
+        </div>
+
+        <div class="add-book-btn">
+            <button mat-button (click)="addBookToPanier(bookItem)">Ajouter au Panier</button>
+        </div>
+        <br>
+        <div class="comment">
+            Ajouter cet article à votre panier<br> et découvrir nos offres!!
+        </div>
+       
+
+    </div>
+</div>

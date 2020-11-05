@@ -1,0 +1,13 @@
+.books-list-container {
+    display:flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+}
+
+.books-container {
+    flex:  1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-top: 2rem;
+}
