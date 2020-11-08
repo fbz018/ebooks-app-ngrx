@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment.prod';
 import { BooksListEffects } from './effects/books.effect';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { BooksListEffects } from './effects/books.effect';
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    EffectsModule.forRoot([BooksListEffects])
+    EffectsModule.forRoot([BooksListEffects]),
+    StoreRouterConnectingModule.forRoot()
   ],
   entryComponents: [
     ShopComponent,
