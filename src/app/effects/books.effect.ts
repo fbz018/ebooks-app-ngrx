@@ -18,7 +18,6 @@ export class BooksListEffects {
         );
 
     constructor(private bookService: BookService, private actions$: Actions) {
-
     }
 
 }
