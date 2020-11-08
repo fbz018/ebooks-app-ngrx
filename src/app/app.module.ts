@@ -12,6 +12,12 @@ import { ShopComponent } from './shop/shop.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header/header.component';
 import { TruncatePipe } from './pipes/TruncatePipe.pipe';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment.prod';
+import { BooksListEffects } from './effects/books.effect';
 
 
 @NgModule({
@@ -30,7 +36,15 @@ import { TruncatePipe } from './pipes/TruncatePipe.pipe';
     BrowserAnimationsModule ,
     MaterialModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
+    EffectsModule.forRoot([BooksListEffects])
   ],
   entryComponents: [
     ShopComponent,
