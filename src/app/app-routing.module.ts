@@ -7,13 +7,11 @@ import { BookDetailGuard } from './guard/book-detail-guard.service';
 const routes: Routes = [
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: 'books', component: BooksListComponent },
-  { path: 'details', 
-  canActivate: [BookDetailGuard],component: BookDetailsComponent},
-  
+  { path: 'details',
+  canActivate: [BookDetailGuard], component: BookDetailsComponent},
+
   { path: '**', redirectTo: 'books', pathMatch: 'full' }
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

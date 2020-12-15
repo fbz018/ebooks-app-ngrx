@@ -1,6 +1,5 @@
-import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BookData } from '../models/book-data';
 import { BookSelectedData } from '../models/book-selected-data';
 import { Offer } from '../models/offer';
@@ -14,73 +13,57 @@ import { CommandService } from '../services/command.service';
 })
 export class ShopComponent implements OnInit {
   public selectedBooks: BookSelectedData[] = [];
-  private subscriptionCommd: Subscription;
-  public show: boolean = false;
+  public show = false;
   public offers$: Observable<Offer[]> = undefined;
-  public montantAPayer: number = 0;
-  public montantTotal: number = 0
-  constructor(private commandService: CommandService, private bookService: BookService) {
+  public montantAPayer = 0;
+  public montantTotal = 0;  constructor(private commandService: CommandService, private bookService: BookService) {
 
   }
 
-  ngOnInit() {
-    let books = this.bookService.getSelectedBooks();
+  ngOnInit(): void {
+    const books = this.bookService.getSelectedBooks();
     this.selectedBooks = this.commandService.getBooksInCommand(books);
-    // .subscribe(
-    //   data =>{
-    //     console.log('data in shop..', data);
-    //     this.selectedBooks = this.commandService.getBooksInCommand(data);
-    //   } ,
-    //   err => console.log('error....')
-
-    // )
   }
 
-  public trackByFn = (index: number, item: BookSelectedData) => (item) ? item.elem : undefined;
+  public trackByFn = (item: BookSelectedData) => (item) ? item.elem : undefined;
 
-  public showOffersPanel(items) {
+  public showOffersPanel(items): void{
     this.show = !this.show;
-    this.offers$ = this.commandService.getOffers(items)
+    this.offers$ = this.commandService.getOffers(items);
     this.offers$.subscribe(
       data => console.log(JSON.stringify(data)));
   }
 
-  offerPercentClicked(reduc: number) {
+  offerPercentClicked(reduc: number): void {
     this.montantAPayer = (this.montantTotal - (reduc * this.montantTotal) / 100);
   }
-  offerMinusClicked(reduc: number) {
+  offerMinusClicked(reduc: number): void {
     this.montantAPayer = this.montantTotal - reduc;
   }
 
-  offerSliceClicked(reduc: number) {
+  offerSliceClicked(reduc: number): void {
     this.montantAPayer = this.montantTotal - Math.floor(this.montantTotal / 100) * reduc;
   }
 
-  public getMontantTotal() {
+  public getMontantTotal(): number {
     this.montantTotal = this.selectedBooks.reduce(((s, item) => (item.elem.price * item.nbocc) + s), 0);
     return this.montantTotal;
   }
 
-  deleteBookFromList(item:BookData, index) {
-    let newlist= this.bookService.deleteBook(item, index);
+  deleteBookFromList(item: BookData): void {
+    const newlist = this.bookService.deleteBook(item);
     this.selectedBooks = this.commandService.getBooksInCommand(newlist);
   }
 
- removeOneBook(item:BookData) {
-  let newlist= this.bookService.removeOneBook(item);
-    this.selectedBooks = this.commandService.getBooksInCommand(newlist);
+ removeOneBook(item: BookData): void {
+  const newlist = this.bookService.removeOneBook();
+  this.selectedBooks = this.commandService.getBooksInCommand(newlist);
  }
 
-
- addOneBook(item:BookData) {
-   this.bookService.addSelectedBook(item);
-  let books = this.bookService.getSelectedBooks();
-  
+ addOneBook(item: BookData): void {
+  this.bookService.addSelectedBook(item);
+  const books = this.bookService.getSelectedBooks();
   this.selectedBooks = this.commandService.getBooksInCommand(books);
  }
-  ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-   // this.subscriptionCommd.unsubscribe();
-  }
 
 }

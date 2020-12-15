@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject, Subscriber } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookData } from '../models/book-data';
-import { BookSelectedData } from '../models/book-selected-data';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class BookService {
   constructor(private http: HttpClient) { }
   private auxtab: BookData[] = [];
   getBooks(): Observable<BookData[]> {
-    return this.http.get<BookData[]>("http://henri-potier.xebia.fr/books");
+    return this.http.get<BookData[]>('http://henri-potier.xebia.fr/books');
   }
 
   getBook(item: BookData): Observable<BookData | undefined> {
@@ -24,7 +23,7 @@ export class BookService {
         map((books: BookData[]) => books.find(b => b.isbn === item.isbn)));
   }
 
-  addSelectedBook(newItem: BookData) {
+  addSelectedBook(newItem: BookData): void {
     if (newItem) {
       this.auxtab.push(newItem);
       this.booksSelectedArray.next(this.auxtab);
@@ -32,12 +31,11 @@ export class BookService {
     }
   }
 
-  addOneBook(newItem: BookData) {
+  addOneBook(newItem: BookData): void {
     this.auxtab.push(newItem);
   }
 
   getSelectedBooks(): BookData[] {
-    // this.booksSelectedArray.asObservable();
     return this.auxtab;
   }
 
@@ -46,20 +44,17 @@ export class BookService {
   }
 
 
-  deleteBook(item: BookData, index: number): BookData[] {
-    let newtab: BookData[] = [];
+  deleteBook(item: BookData): BookData[] {
     this.auxtab = this.auxtab.filter(e => e.isbn.toString() !== item.isbn.toString());
     this.booksSelectedArray.next(this.auxtab);
     this.nbbooksSelected.next(this.auxtab.length);
     return this.auxtab;
   }
 
-  removeOneBook(item: BookData): BookData[] {
-    let pos = this.auxtab.findIndex(e => JSON.stringify(e.isbn).toString() === JSON.stringify(item.isbn).toString());
+  removeOneBook(): BookData[] {
     this.auxtab.splice(0, 1);
     this.nbbooksSelected.next(this.auxtab.length);
     return this.auxtab;
-
   }
 
 }
